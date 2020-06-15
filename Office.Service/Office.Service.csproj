@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Office.Core\Office.Core.csproj" />
+    <ProjectReference Include="..\Office.Data\Office.Data.csproj" />
+  </ItemGroup>
 </Project>
