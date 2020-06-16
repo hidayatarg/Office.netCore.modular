@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Office.Core.Models;
+using Office.Data.Configurations;
 
 namespace Office.Data
 {
@@ -15,6 +16,10 @@ namespace Office.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configuration Comes Here => Placed in Configuration
+            // modelBuilder.Entity<Product>().Property(x => x.Id).UseIdentityColumn();
+            // Since We Use Configurations
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
         }
     }
      
