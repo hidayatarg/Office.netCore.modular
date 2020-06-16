@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Office.Core.Repositories
 {
-    internal interface IRepository<TEntity> where TEntity: class
+    public interface IRepository<TEntity> where TEntity: class
     {
         Task<TEntity> GetByIdAsyn(int id);
 
