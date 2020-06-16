@@ -14,7 +14,7 @@ namespace Office.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            // Configuration Comes Here => Placed in Configuration
         }
     }
      
