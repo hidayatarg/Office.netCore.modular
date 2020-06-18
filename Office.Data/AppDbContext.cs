@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Office.Core.Models;
 using Office.Data.Configurations;
+using Office.Data.Seeds;
 
 namespace Office.Data
 {
@@ -20,6 +21,11 @@ namespace Office.Data
             // Since We Use Configurations
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+         
+            // Apply Seeds
+            modelBuilder.ApplyConfiguration(new ProductSeed(new int[] {1, 2}));
+            modelBuilder.ApplyConfiguration(new CategorySeed(new int[] {1, 2}));
+
         }
     }
      
