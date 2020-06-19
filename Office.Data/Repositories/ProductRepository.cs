@@ -7,7 +7,7 @@ namespace Office.Data.Repositories
 {
     public class ProductRepository: Repository<Product>, IProductRepository
     {
-        private AppDbContext appDbContext { get => _context as AppDbContext;}
+        private AppDbContext _appDbContext { get => _context as AppDbContext;}
         
         public ProductRepository(DbContext context) : base(context)
         {
@@ -15,7 +15,7 @@ namespace Office.Data.Repositories
 
         public async Task<Product> GetWithCategoryByIdAsync(int productId)
         {
-            var product = appDbContext.Products
+            var product = _appDbContext.Products
                 .Include(x => x.Category)
                 .SingleOrDefaultAsync(x => x.Id == productId);
             return await product;
