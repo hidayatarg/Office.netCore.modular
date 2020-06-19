@@ -8,9 +8,9 @@ using Office.Core.Repositories;
 
 namespace Office.Data.Repositories
 {
-    class Repository<TEntity>: IRepository<TEntity> where TEntity: class
+    public class Repository<TEntity>: IRepository<TEntity> where TEntity: class
     {
-        private readonly DbContext _context;
+        protected readonly DbContext _context;
         private readonly DbSet<TEntity> _dbSet;
 
         public Repository(DbContext context)
