@@ -31,7 +31,7 @@ namespace Office.API
         {
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionStrings:SqlString"], o =>
+                options.UseSqlServer(Configuration["ConnectionString:SqlString"], o =>
                 {
                     o.MigrationsAssembly("Office.Data");
                 });
