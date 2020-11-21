@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Office.API.DTOs;
 using Office.Core.Services;
 
 namespace Office.API.Controllers
@@ -12,10 +14,12 @@ namespace Office.API.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
+        private readonly IMapper _mapper;
 
-        public CategoryController(ICategoryService categoryService)
+        public CategoryController(ICategoryService categoryService, IMapper mapper)
         {
             _categoryService = categoryService;
+            _mapper = mapper;
         }
 
         // GET :> Calling the controller will give following
@@ -23,8 +27,9 @@ namespace Office.API.Controllers
         public async Task <IActionResult> GetAll()
         {
             // Entites should not be return Data Transfer Objects should be returned
-            var category = await _categoryService.GetAllAsync();
-            return Ok(category);
+            var categories = await _categoryService.GetAllAsync();
+            var result = _mapper.Map<IEnumerable<CategoryDTO>>(categories);
+            return Ok(result);
         }
 
        

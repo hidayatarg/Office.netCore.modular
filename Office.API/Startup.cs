@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -18,6 +19,7 @@ using Office.Data;
 using Office.Data.Repositories;
 using Office.Data.UnitOfWorks;
 using Office.Service.Services;
+
 
 namespace Office.API
 {
@@ -40,7 +42,9 @@ namespace Office.API
                     o.MigrationsAssembly("Office.Data");
                 });
             });
-            
+
+            services.AddAutoMapper(typeof(Startup));
+
             // Dependency Injection
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             // Repository scope => if you get IRepository give Repository
