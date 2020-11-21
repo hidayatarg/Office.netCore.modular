@@ -1,4 +1,4 @@
-using System;
+ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,9 +11,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Office.Core.Repositories;
+using Office.Core.Services;
 using Office.Core.UnitOfWorks;
 using Office.Data;
+using Office.Data.Repositories;
 using Office.Data.UnitOfWorks;
+using Office.Service.Services;
 
 namespace Office.API
 {
@@ -39,7 +43,13 @@ namespace Office.API
             
             // Dependency Injection
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            
+            // Repository scope => if you get IRepository give Repository
+            // Generic Types
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IService<>), typeof(Service<>));
+            // Object Types
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IProductService, ProductService>();
             services.AddControllers();
         }
 
