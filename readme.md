@@ -6,3 +6,8 @@ docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=ProductApi(!)' -e 'MSSQL_PID=Expre
 docker start catalogdb
 
 ```
+
+### Migration
+It will create the database with name of mentioned in API `AppSetting.json`
+
+`First Test Route: https://localhost:5001/api/Category/`
