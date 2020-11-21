@@ -16,3 +16,13 @@ It will create the database with name of mentioned in API `AppSetting.json`
 NuGet Packages
 - `AutoMapper.Extensions.Microsoft.DependencyInjection`
 - `AutoMapper`
+
+
+#### POST Category
+Type JSON Raw Body
+https://localhost:5001/api/Category
+```json
+{
+    "Name":"CarKit"
+}
+```

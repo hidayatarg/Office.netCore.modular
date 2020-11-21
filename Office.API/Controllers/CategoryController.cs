@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Office.API.DTOs;
+using Office.Core.Models;
 using Office.Core.Services;
 
 namespace Office.API.Controllers
@@ -41,5 +42,13 @@ namespace Office.API.Controllers
             return Ok(result);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Save(CategoryDTO categoryDTO)
+        {
+            var categoryToSave = await _categoryService.AddAsync(_mapper.Map<Category>(categoryDTO));
+            // null => URL of the newly added category
+            return Created(string.Empty, _mapper.Map<CategoryDTO>(categoryToSave));
+        }
+         
     }
 }
