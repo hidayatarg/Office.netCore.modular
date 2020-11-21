@@ -32,6 +32,14 @@ namespace Office.API.Controllers
             return Ok(result);
         }
 
-       
+        //GET :> /api/Category/1
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var category = await _categoryService.GetByIdAsyn(id);
+            var result = _mapper.Map<CategoryDTO>(category);
+            return Ok(result);
+        }
+
     }
 }
