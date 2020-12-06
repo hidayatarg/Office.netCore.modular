@@ -56,5 +56,13 @@ namespace Office.API.Controllers
             var productToUpdate = _productService.Update(_mapper.Map<Product>(productDto));
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Remove(int id)
+        {
+            var product = _productService.GetByIdAsyn(id).Result;
+            _productService.Remove(product);
+            return NoContent();
+        }
     }
 }
