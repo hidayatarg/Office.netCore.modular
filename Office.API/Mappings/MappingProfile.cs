@@ -9,9 +9,14 @@ namespace Office.API.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<Category, CategoryDTO>();
-            CreateMap<CategoryDTO, Category>();
+            CreateMap<Category, CategoryDto>();
+            CreateMap<CategoryDto, Category>();
 
+            CreateMap<Category, CategoryWithProductDto>();
+            CreateMap<CategoryWithProductDto, Category>();
+
+            CreateMap<Product, ProductDto>();
+            CreateMap<ProductDto, Product>();
         }
     }
 }

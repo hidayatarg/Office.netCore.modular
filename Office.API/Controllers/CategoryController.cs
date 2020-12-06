@@ -29,7 +29,7 @@ namespace Office.API.Controllers
         {
             // Entites should not be return Data Transfer Objects should be returned
             var categories = await _categoryService.GetAllAsync();
-            var result = _mapper.Map<IEnumerable<CategoryDTO>>(categories);
+            var result = _mapper.Map<IEnumerable<CategoryDto>>(categories);
             return Ok(result);
         }
 
@@ -38,23 +38,30 @@ namespace Office.API.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var category = await _categoryService.GetByIdAsyn(id);
-            var result = _mapper.Map<CategoryDTO>(category);
+            var result = _mapper.Map<CategoryDto>(category);
             return Ok(result);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Save(CategoryDTO categoryDTO)
+        [HttpGet("{id}/products")]
+        public async Task<IActionResult> GetWithProductsById(int id)
         {
-            var categoryToSave = await _categoryService.AddAsync(_mapper.Map<Category>(categoryDTO));
+            var category = await _categoryService.GetWithProductsByIdAsync(id);
+            return Ok(_mapper.Map<CategoryWithProductDto>(category));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Save(CategoryDto categoryDto)
+        {
+            var categoryToSave = await _categoryService.AddAsync(_mapper.Map<Category>(categoryDto));
             // null => URL of the newly added category
-            return Created(string.Empty, _mapper.Map<CategoryDTO>(categoryToSave));
+            return Created(string.Empty, _mapper.Map<CategoryDto>(categoryToSave));
         }
 
         // not asynchronus method
         [HttpPut]
-        public IActionResult Update(CategoryDTO categoryDTO)
+        public IActionResult Update(CategoryDto categoryDto)
         {
-            var categoryToUpdate = _categoryService.Update(_mapper.Map<Category>(categoryDTO));
+            var categoryToUpdate = _categoryService.Update(_mapper.Map<Category>(categoryDto));
             // donot return anything return 204
             // problem for big query if you return
             return NoContent();

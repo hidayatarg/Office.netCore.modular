@@ -2,7 +2,7 @@
 
 namespace Office.API.DTOs
 {
-    public class CategoryDTO
+    public class CategoryDto
     {
         public int Id { get; set; }
         
