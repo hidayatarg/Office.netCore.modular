@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Office.API.DTOs;
+using Office.Core.Models;
 using Office.Core.Services;
 
 namespace Office.API.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -40,5 +42,12 @@ namespace Office.API.Controllers
             return Ok(result);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Save(ProductDto productDto)
+        {
+            var categoryToSave = await _productService.AddAsync(_mapper.Map<Product>(productDto));
+            // null => URL of the newly added category
+            return Created(string.Empty, _mapper.Map<ProductDto>(categoryToSave));
+        }
     }
 }
