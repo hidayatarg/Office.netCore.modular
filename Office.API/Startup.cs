@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Office.API.Filters;
 using Office.Core.Repositories;
 using Office.Core.Services;
 using Office.Core.UnitOfWorks;
@@ -45,6 +46,8 @@ namespace Office.API
 
             services.AddAutoMapper(typeof(Startup));
 
+            // **ProductNotFoundFilter is asking for the iproductService so we need to add in scope
+            services.AddScoped<ProductNotFoundFilter>();
             // Dependency Injection
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             // Repository scope => if you get IRepository give Repository
