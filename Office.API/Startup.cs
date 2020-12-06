@@ -57,7 +57,10 @@ namespace Office.API
             // Object Types
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(new ValidationFilter());
+            });
 
             // change the API behavior
             services.Configure<ApiBehaviorOptions>(options =>
