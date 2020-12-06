@@ -7,6 +7,11 @@ docker start catalogdb
 
 ```
 
+### Docker Containers Tricks
+-   to list or check active containers `docker ps`
+-   to list all containers `docker ps -a`
+-   to start a container `docker start CONTAINER_ID`
+
 ### Migration
 It will create the database with name of mentioned in API `AppSetting.json`
 
@@ -26,3 +31,4 @@ https://localhost:5001/api/Category
     "Name":"CarKit"
 }
 ```
+

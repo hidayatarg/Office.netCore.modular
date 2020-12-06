@@ -49,6 +49,16 @@ namespace Office.API.Controllers
             // null => URL of the newly added category
             return Created(string.Empty, _mapper.Map<CategoryDTO>(categoryToSave));
         }
+
+        // not asynchronus method
+        [HttpPut]
+        public IActionResult Update(CategoryDTO categoryDTO)
+        {
+            var categoryToUpdate =  _categoryService.Update(_mapper.Map<Category>(categoryDTO));
+            // donot return anything return 204
+            // problem for big query if you return
+            return NoContent();
+        }
          
     }
 }
