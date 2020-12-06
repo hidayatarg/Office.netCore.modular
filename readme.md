@@ -32,3 +32,5 @@ https://localhost:5001/api/Category
 }
 ```
 
+### Best Practices
+Try catch are not used in controller there will be a middleware class to catch the exceptions.

@@ -25,7 +25,7 @@ namespace Office.API.Controllers
 
         // GET :> Calling the controller will give following
         [HttpGet]
-        public async Task <IActionResult> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             // Entites should not be return Data Transfer Objects should be returned
             var categories = await _categoryService.GetAllAsync();
@@ -54,11 +54,20 @@ namespace Office.API.Controllers
         [HttpPut]
         public IActionResult Update(CategoryDTO categoryDTO)
         {
-            var categoryToUpdate =  _categoryService.Update(_mapper.Map<Category>(categoryDTO));
+            var categoryToUpdate = _categoryService.Update(_mapper.Map<Category>(categoryDTO));
             // donot return anything return 204
             // problem for big query if you return
             return NoContent();
         }
-         
+
+        [HttpDelete("{id}")]
+        public IActionResult Remove(int id)
+        {
+            var categoryToRemove = _categoryService.GetByIdAsyn(id).Result;
+            _categoryService.Remove(categoryToRemove);
+
+            return NoContent();
+        }
+
     }
 }
