@@ -34,3 +34,10 @@ https://localhost:5001/api/Category
 
 ### Best Practices
 Try catch are not used in controller there will be a middleware class to catch the exceptions.
+
+#### Action Filters 
+We can change the the codes in the request pipline using filters. In the insert methods we expect the data to arrive for that we used if block to check if the incoming data is valid or not.
+
+services.Configure<ApiBehaviorOptions>
+
+we will change the behavior of the API and Return custom Errors.

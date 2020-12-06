@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Office.API.DTOs;
+using Office.API.Filters;
 using Office.Core.Models;
 using Office.Core.Services;
 
@@ -49,6 +50,7 @@ namespace Office.API.Controllers
             return Ok(_mapper.Map<ProductWithCategoryDto>(product));
         }
 
+        [ValidationFilter]
         [HttpPost]
         public async Task<IActionResult> Save(ProductDto productDto)
         {
