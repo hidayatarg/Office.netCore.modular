@@ -45,9 +45,16 @@ namespace Office.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(ProductDto productDto)
         {
-            var categoryToSave = await _productService.AddAsync(_mapper.Map<Product>(productDto));
+            var productToSave = await _productService.AddAsync(_mapper.Map<Product>(productDto));
             // null => URL of the newly added category
-            return Created(string.Empty, _mapper.Map<ProductDto>(categoryToSave));
+            return Created(string.Empty, _mapper.Map<ProductDto>(productToSave));
+        }
+
+        [HttpPut]
+        public IActionResult Update (ProductDto productDto)
+        {
+            var productToUpdate = _productService.Update(_mapper.Map<Product>(productDto));
+            return NoContent();
         }
     }
 }
