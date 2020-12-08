@@ -28,5 +28,6 @@
     <Folder Include="DTOs\" />
     <Folder Include="Mappings\" />
     <Folder Include="Filters\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>
