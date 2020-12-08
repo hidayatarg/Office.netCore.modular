@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Office.Core.Services;
+using Office.Web.DTOs;
 
 namespace Office.Web.Controllers
 {
@@ -19,10 +20,11 @@ namespace Office.Web.Controllers
             _mapper = mapper;
         }
         
-        // GET: /<controller>/
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var categories = await _categoryService.GetAllAsync();
+            var result = _mapper.Map<IEnumerable<CategoryDto>>(categories);
+            return View(result);
         }
     }
 }

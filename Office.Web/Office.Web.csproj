@@ -15,5 +15,6 @@
   <ItemGroup>
     <Folder Include="DTOs\" />
     <Folder Include="Mappings\" />
+    <Folder Include="Views\Category\" />
   </ItemGroup>
 </Project>
