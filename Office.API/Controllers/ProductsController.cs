@@ -63,6 +63,10 @@ namespace Office.API.Controllers
         [HttpPut]
         public IActionResult Update (ProductDto productDto)
         {
+            // should be removed
+            if (string.IsNullOrEmpty(productDto.Id.ToString()) || productDto.Id <= default(int))
+                throw new Exception("Id is Required!");
+
             var productToUpdate = _productService.Update(_mapper.Map<Product>(productDto));
             return NoContent();
         }
