@@ -5,9 +5,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Office.Core.Repositories;
+using Office.Core.Services;
+using Office.Core.UnitOfWorks;
+using Office.Data;
+using Office.Data.Repositories;
+using Office.Data.UnitOfWorks;
+using Office.Service.Services;
 
 namespace Office.Web
 {
@@ -23,6 +31,21 @@ namespace Office.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration["ConnectionString:SqlString"], o =>
+                {
+                    o.MigrationsAssembly("Office.Data");
+                });
+            });
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            // Repository scope => if you get IRepository give Repository
+            // Generic Types
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IService<>), typeof(Service<>));
+            // Object Types
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IProductService, ProductService>();
             services.AddControllersWithViews();
         }
 
