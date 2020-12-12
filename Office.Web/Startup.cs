@@ -18,6 +18,7 @@ using Office.Data;
 using Office.Data.Repositories;
 using Office.Data.UnitOfWorks;
 using Office.Service.Services;
+using Office.Web.ApiService;
 
 namespace Office.Web
 {
@@ -40,6 +41,12 @@ namespace Office.Web
                     o.MigrationsAssembly("Office.Data");
                 });
             });
+            // External Services 
+            services.AddHttpClient<CategoryApiService>(options =>
+            {
+                options.BaseAddress = new Uri(Configuration["baseUrl"]);
+            });
+
 
             // NOTFOUND take a service parameter so we need to add here
             // ** because of contructor we need to add as the service parameter
