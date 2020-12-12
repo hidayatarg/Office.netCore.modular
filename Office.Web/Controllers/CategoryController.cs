@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Office.API.Filters;
-using Office.Core.Models;
-using Office.Core.Services;
 using Office.Web.ApiService;
 using Office.Web.DTOs;
 
@@ -14,13 +12,11 @@ namespace Office.Web.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
         private readonly CategoryApiService _categoryApiService;
 
-        public CategoryController(ICategoryService categoryService, IMapper mapper, CategoryApiService categoryApiService)
+        public CategoryController(IMapper mapper, CategoryApiService categoryApiService)
         {
-            _categoryService = categoryService;
             _mapper = mapper;
             _categoryApiService = categoryApiService;
         }

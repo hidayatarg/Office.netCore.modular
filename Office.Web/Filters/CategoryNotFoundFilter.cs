@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Office.Core.Services;
+using Office.Web.ApiService;
 using Office.Web.DTOs;
 
 namespace Office.API.Filters
@@ -10,11 +10,11 @@ namespace Office.API.Filters
     public class CategoryNotFoundFilter : ActionFilterAttribute
     {
         // need a connection to the database
-        private readonly ICategoryService _categoryService;
+        private readonly CategoryApiService _categoryApiService;
 
-        public CategoryNotFoundFilter(ICategoryService categoryService)
+        public CategoryNotFoundFilter(CategoryApiService categoryApiService)
         {
-            _categoryService = categoryService;
+            _categoryApiService = categoryApiService;
         }
 
         public async override Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
@@ -22,7 +22,7 @@ namespace Office.API.Filters
             // ** method that take id parameters in product has one value so FirstOrDefault() will work.
             int id = (int)context.ActionArguments.Values.FirstOrDefault();
 
-            var product = await _categoryService.GetByIdAsyn(id);
+            var product = await _categoryApiService.GetByIdAsync(id);
             if(product != null)
             {
                 await next();

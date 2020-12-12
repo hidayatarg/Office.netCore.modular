@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Office.Web.DTOs;
 using Newtonsoft.Json;
 using System.Text;
-using Office.Core.Models;
 
 namespace Office.Web.ApiService
 {
