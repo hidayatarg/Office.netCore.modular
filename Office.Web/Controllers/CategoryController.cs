@@ -48,7 +48,7 @@ namespace Office.Web.Controllers
         [ServiceFilter(typeof(CategoryNotFoundFilter))]
         public async Task<IActionResult> Update(int id)
         {
-            var category = await _categoryService.GetByIdAsyn(id);
+            var category = await _categoryApiService.GetByIdAsync(id);
             return View(_mapper.Map<CategoryDto>(category));
         }
 

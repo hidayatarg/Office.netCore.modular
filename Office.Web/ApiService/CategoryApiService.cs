@@ -56,5 +56,22 @@ namespace Office.Web.ApiService
                 return null;
             }
         }
+
+        public async Task<CategoryDto> GetByIdAsync(int id)
+        {
+            var response = await _httpClient.GetAsync($"category/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert
+                   .DeserializeObject<CategoryDto>(
+                   await response.Content.ReadAsStringAsync());
+            }
+            else
+            {
+                // ** Log
+                return null;
+            }
+        }
     }
 }
