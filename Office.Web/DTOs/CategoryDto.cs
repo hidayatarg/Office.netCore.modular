@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Office.API.DTOs
+namespace Office.Web.DTOs
 {
     public class CategoryDto
     {
         public int Id { get; set; }
-
-        [Required(ErrorMessage = "{0} is Required.")]
+        
+        [Required]
         public string Name { get; set; }
     }
 }
