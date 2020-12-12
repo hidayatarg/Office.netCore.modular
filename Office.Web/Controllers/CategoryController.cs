@@ -20,7 +20,7 @@ namespace Office.Web.Controllers
             _categoryService = categoryService;
             _mapper = mapper;
         }
-        
+
         public async Task<IActionResult> Index()
         {
             var categories = await _categoryService.GetAllAsync();
@@ -39,5 +39,20 @@ namespace Office.Web.Controllers
             await _categoryService.AddAsync(_mapper.Map<Category>(categoryDto));
             return RedirectToAction("Index");
         }
+
+        // Update/5
+        public async Task<IActionResult> Update(int id)
+        {
+            var category = await _categoryService.GetByIdAsyn(id);
+            return View(_mapper.Map<CategoryDto>(category));
+        }
+
+        [HttpPost]
+        public IActionResult Update(CategoryDto categoryDto)
+        {
+            _categoryService.Update(_mapper.Map<Category>(categoryDto));
+            return RedirectToAction("Index");
+        }
+
     }
 }
