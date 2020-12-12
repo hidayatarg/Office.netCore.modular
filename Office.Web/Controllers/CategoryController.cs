@@ -61,10 +61,9 @@ namespace Office.Web.Controllers
 
         // Delete/5
         [ServiceFilter(typeof(CategoryNotFoundFilter))]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
-            var category = _categoryService.GetByIdAsyn(id).Result;
-            _categoryService.Remove(category);
+            await _categoryApiService.Remove(id);
             return RedirectToAction("Index");
         }
 
