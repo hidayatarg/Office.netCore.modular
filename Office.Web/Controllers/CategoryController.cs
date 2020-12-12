@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Office.API.Filters;
 using Office.Core.Models;
 using Office.Core.Services;
+using Office.Web.ApiService;
 using Office.Web.DTOs;
 
 namespace Office.Web.Controllers
@@ -15,16 +16,18 @@ namespace Office.Web.Controllers
     {
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
+        private readonly CategoryApiService _categoryApiService;
 
-        public CategoryController(ICategoryService categoryService, IMapper mapper)
+        public CategoryController(ICategoryService categoryService, IMapper mapper, CategoryApiService categoryApiService)
         {
             _categoryService = categoryService;
             _mapper = mapper;
+            _categoryApiService = categoryApiService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var categories = await _categoryService.GetAllAsync();
+            var categories = await _categoryApiService.GetAllAsync();
             var result = _mapper.Map<IEnumerable<CategoryDto>>(categories);
             return View(result);
         }
