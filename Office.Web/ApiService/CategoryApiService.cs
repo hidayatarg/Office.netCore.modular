@@ -4,6 +4,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Office.Web.DTOs;
 using Newtonsoft.Json;
+using System.Text;
+using Office.Core.Models;
 
 namespace Office.Web.ApiService
 {
@@ -33,6 +35,26 @@ namespace Office.Web.ApiService
                 categoryDto = null;
             }
             return categoryDto;
+        }
+
+        public async Task<CategoryDto> AddAsync(CategoryDto categoryDto)
+        {
+            var stringContent = new StringContent(JsonConvert.SerializeObject(categoryDto), Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PostAsync("category", stringContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                categoryDto = JsonConvert
+                   .DeserializeObject<CategoryDto>(
+                   await response.Content.ReadAsStringAsync());
+                return categoryDto;
+            }
+            else
+            {
+                // ** Log
+                return null;
+            }
         }
     }
 }
