@@ -5,8 +5,8 @@ namespace Office.API.DTOs
     public class CategoryDto
     {
         public int Id { get; set; }
-        
-        [Required]
+
+        [Required(ErrorMessage = "{0} is Required.")]
         public string Name { get; set; }
     }
 }
