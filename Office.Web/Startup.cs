@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Office.API.Filters;
 using Office.Core.Repositories;
 using Office.Core.Services;
 using Office.Core.UnitOfWorks;
@@ -39,6 +40,10 @@ namespace Office.Web
                     o.MigrationsAssembly("Office.Data");
                 });
             });
+
+            // NOTFOUND take a service parameter so we need to add here
+            // ** because of contructor we need to add as the service parameter
+            services.AddScoped<CategoryNotFoundFilter>();
 
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IUnitOfWork, UnitOfWork>();

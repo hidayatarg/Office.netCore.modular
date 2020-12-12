@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Office.API.Filters;
 using Office.Core.Models;
 using Office.Core.Services;
 using Office.Web.DTOs;
@@ -41,6 +42,7 @@ namespace Office.Web.Controllers
         }
 
         // Update/5
+        [ServiceFilter(typeof(CategoryNotFoundFilter))]
         public async Task<IActionResult> Update(int id)
         {
             var category = await _categoryService.GetByIdAsyn(id);
@@ -55,6 +57,7 @@ namespace Office.Web.Controllers
         }
 
         // Delete/5
+        [ServiceFilter(typeof(CategoryNotFoundFilter))]
         public IActionResult Delete(int id)
         {
             var category = _categoryService.GetByIdAsyn(id).Result;
