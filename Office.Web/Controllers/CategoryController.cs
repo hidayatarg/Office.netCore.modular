@@ -54,5 +54,13 @@ namespace Office.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        // Delete/5
+        public IActionResult Delete(int id)
+        {
+            var category = _categoryService.GetByIdAsyn(id).Result;
+            _categoryService.Remove(category);
+            return RedirectToAction("Index");
+        }
+
     }
 }
